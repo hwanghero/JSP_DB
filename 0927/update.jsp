@@ -46,17 +46,18 @@
 			
 		rs = pstmt.executeQuery();
 		if(rs.next()){
-			out.println("o");
+			String sql3 = "update insa set pass=?, name=? where id=?";
+			pstmt_insert = conn.prepareStatement(sql3);
+			pstmt_insert.setString(1, ipass);
+			pstmt_insert.setString(2, iname);
+			pstmt_insert.setString(3, iid);
+			pstmt_insert.executeUpdate();
+			out.println(iid+","+ipass+","+iname);
+			out.println("o -> update");
 			pstmt_insert.close();
 		}else{
-			String sql3 = "insert into insa(id,pass,name) values(?,?,?)";
-			pstmt_insert = conn.prepareStatement(sql3);
-			pstmt_insert.setString(1, iid);
-			pstmt_insert.setString(2, ipass);
-			pstmt_insert.setString(3, iname);
-			pstmt_insert.executeUpdate();
-			out.println("x -> insert");
-			pstmt_insert.close();
+			out.println("x");
+			pstmt.close();
 		}
 		pstmt.close();
 	%>

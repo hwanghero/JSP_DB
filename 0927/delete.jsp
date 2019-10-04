@@ -10,12 +10,11 @@
 <html>
 <head>
 	<meta charset="UTF-8"> 
-	<title>insert</title>
+	<title>delete</title>
 
 </head>
 <body>
 	<%
-	
 		String iid = request.getParameter("iid");
 		String ipass = request.getParameter("ipass");
 		String iname = request.getParameter("iname");
@@ -27,17 +26,15 @@
 		Statement stmt = null;
 		
 		out.println("loading<br>");
-		
-
+	
 		String url = "jdbc:mysql://localhost:3306/hero?serverTimezone=UTC";        
 		String id = "root";                                                
-		String pw = "root";
+		String pw = "root";     
 		
 		Class.forName("com.mysql.jdbc.Driver");                      
 		conn = DriverManager.getConnection(url,id,pw);              
 		out.println("connection<br>");
-			
-		String sql1 = "select * from insa where id="+iid;
+
 		String sql2 = "select * from insa where id=?";
 
 		pstmt = conn.prepareStatement(sql2);
@@ -46,20 +43,16 @@
 			
 		rs = pstmt.executeQuery();
 		if(rs.next()){
-			out.println("o");
-			pstmt_insert.close();
-		}else{
-			String sql3 = "insert into insa(id,pass,name) values(?,?,?)";
+			String sql3 = "delete from insa where id=?";
 			pstmt_insert = conn.prepareStatement(sql3);
 			pstmt_insert.setString(1, iid);
-			pstmt_insert.setString(2, ipass);
-			pstmt_insert.setString(3, iname);
 			pstmt_insert.executeUpdate();
-			out.println("x -> insert");
+			out.println("delete success");
 			pstmt_insert.close();
+		}else{
+			out.println("x");
 		}
 		pstmt.close();
 	%>
-
 </body>
 </html>
