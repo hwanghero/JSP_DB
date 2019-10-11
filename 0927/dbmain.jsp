@@ -40,6 +40,41 @@
 			document.frm1.action="update_from.jsp";
 			document.frm1.submit();
 		}
+		
+		function insert2(){
+			if(document.frm1.iid.value == ""){
+				alert("id를 입력하세요");
+				return false;
+			}
+			if(document.frm1.ipass.value == ""){
+				alert("pw를 입력하세요");
+				return false;	
+			}
+			if(document.frm1.iname.value == ""){
+				alert("name를 입력하세요");
+				return false;
+			}
+			document.frm1.action="insert2.jsp";
+			document.frm1.submit();
+		}
+		
+		function update2(){
+			if(document.frm1.iid.value == ""){
+				alert("id를 입력하세요");
+				return false;
+			}
+			alert("update");
+			document.frm1.action="update2.jsp";
+			document.frm1.submit();
+		}
+		function delete2(){
+			if(document.frm1.iid.value == ""){
+				alert("id를 입력하세요");
+				return false;
+			}
+			alert("delete");
+			window.location="delete2.jsp?iid="+document.frm1.iid.value;
+		}
 	</script>
 </head>
 <body>
@@ -62,6 +97,13 @@
 				<input type='button' value='insert' onclick='insert()'>
 				<input type='button' value='delete' onclick='delete1()'>
 				<input type='button' value='update' onclick='update1()'>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type='button' value='insert(stmt)' onclick='insert2()'>
+				<input type='button' value='update(stmt)' onclick='update2()'>
+				<input type='button' value='delete(stmt)' onclick='delete2()'>
 			</td>
 		</tr>
 	</table>
